@@ -1,0 +1,88 @@
+// ======================[ Switch ]======================
+
+// Styles for checkbox
+.switch {
+	width: 70px;
+	height: 30px;
+	position: relative;
+	cursor: pointer;
+	display: flex;
+	&__checkbox {
+		display: none;
+
+		&:checked + .switch__slider {
+			background: darkcyan;
+			&:after {
+				left: 45px;
+				display: flex;
+				background: whitesmoke;
+			}
+		}
+	}
+	&__slider {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: #43adff;
+		border-radius: 30px;
+		transition: 0.5s background;
+		&::after {
+			position: absolute;
+			content: '';
+			width: 20px;
+			height: 20px;
+			border-radius: 100%;
+			background-color: #fff;
+			transition: 0.5s left, background;
+			left: 5px;
+			top: 5px;
+		}
+	}
+}
+
+
+// Styles for icons
+.page__theme {
+  width: 20px;
+  height: 20px;
+}
+.page__reset.active {
+  opacity: 1;
+  visibility: visible;
+}
+.page__reset::before { // <-- this is button for clear a hand's settings
+  content: "x";
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  font-size: 7px;
+  border-radius: 50%;
+  line-height: 10;
+  color: orange;
+  text-align: center;
+  background-color: #666;
+}
+
+// ======================[ Change Theme ]======================
+
+html.dark body {
+  color: #fff;
+  background-color: #333;
+}
+html.light body {
+  color: #333;
+  background-color: #fff;
+}
+
+html.dark .page__theme {
+  background-color: black; // <-- here you can past a icon, use a background: url('sun') 0 0 / 100% no-repeat
+}
+
+html.light .page__theme {
+  background-color: yellow; // <-- here you can past a icon, use a background: url('moon') 0 0 / 100% no-repeat
+}

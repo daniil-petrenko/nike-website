@@ -1,0 +1,35 @@
+// ._active - element in viewport zone, start animation
+// ._anim-items - for conect animationScroll for this element
+// ._anim-hide - if you want many animations, with repeat
+// global class for examle ._anim-show, if one animation repeat
+
+// Example
+
+// .vertical__item {
+// 	transform: scale(0);
+// 	transition: all 0.8s ease;
+// }
+// .vertical__item._active {
+// 	transform: scale(1);
+// }
+
+
+// .item__title._active {
+// 	transform: translate(0, 0);
+// 	opacity: 1;
+// }
+// .item__text._active {
+// 	transform: translate(0, 0);
+// 	opacity: 1;
+// }
+
+// ._anim-show {
+// 	transform: translate(0px, 120%);
+// 	opacity: 0;
+// 	transition: all 0.8s ease;
+// }
+// ._anim-show._active,
+// ._active ._anim-show {
+// 	opacity: 1;
+// 	transform: translate(0, 0);
+// }

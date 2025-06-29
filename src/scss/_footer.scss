@@ -1,0 +1,235 @@
+.footer {
+	&__container {}
+	&__main {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		padding: 0 0 rem(90) 0;
+		@media (max-width: $md2) {
+			grid-template-columns: 1fr;
+			row-gap: rem(50);
+		}
+		@media (max-width: $md4) {
+			row-gap: rem(30);
+			padding: 0 0 rem(30) 0;
+		}
+	}
+	&__stay {}
+	&__info {}
+	&__footer {
+		display: flex;
+		justify-content: space-between;
+		padding: rem(21) 0;
+		@media (max-width: $md3) {
+			flex-direction: column;
+			gap: rem(30);
+			align-items: center;
+			padding-top: 0;
+		}
+	}
+	&__copy {
+		font-family: $secondFont;
+		font-style: normal;
+		text-transform: capitalize;
+		color: $mainColor;
+	}
+	&__social {
+	}
+}
+.stay-footer {
+	@media (max-width: $md2) {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: rem(50);
+	}
+	@media (max-width: $md3) {
+		flex-direction: column;
+		gap: rem(40);
+	}
+	@media (max-width: $md4) {
+		gap: rem(30);
+	}
+	&__block {
+		@media (max-width: $md4) {
+			width: 100%;
+		}
+	}
+	&__title {
+		font-family: $fourFont;
+		font-weight: 700;
+		@include adaptivValue('font-size', 48, 32, 1);
+		line-height: 133%;
+		text-transform: capitalize;
+		color: $mainColor;
+		@include adaptivValue('margin-bottom', 32, 20, 1);
+	}
+	&__form {}
+	&__logo {
+		@media (max-width: $md2) {
+			min-height: rem(125);
+		}
+		img {
+			width: rem(240);
+			height: rem(125);
+		}
+	}
+}
+.stay-footer-form {
+	display: inline-block;
+	position: relative;
+	@media (min-width: $md2) {
+		margin-bottom: rem(88);
+	}
+	@media (max-width: $md4) {
+		width: 100%;
+	}
+	&__item {}
+	&__input {
+		padding: rem(16) rem(170) rem(16) rem(83);
+		border: rem(1) solid $mainColor;
+		border-radius: rem(80);
+		line-height: 150%;
+		text-transform: capitalize;
+		color: rgba(255, 255, 255, 0.5);
+		@media (max-width: $md4) {
+			width: 100%;
+			padding: rem(12) rem(120) rem(12) rem(20);
+		}
+	}
+	&__button {
+		background-color: $mainColor;
+		border-radius: rem(80);
+		padding: rem(16) rem(40);
+		line-height: 150%;
+		text-transform: capitalize;
+		color: #000;
+		position: absolute;
+		right: 0;
+		top: rem(1);
+		transition: color 0.3s ease;
+		@media (max-width: $md4) {
+			padding: rem(12) rem(28) rem(12) rem(28);
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				color: rgba(0,0,0,0.5);
+			}
+		}
+	}
+}
+.info-footer {
+	&__items {
+		grid-template-columns: 1fr 1fr 1fr;
+		justify-content: space-between;
+		column-gap: rem(40);
+		row-gap: rem(50);
+		@media (max-width: $md3) {
+			grid-template-columns: repeat(auto-fill, rem(170));
+		}
+		@media (min-width: $md4) {
+			display: grid;
+		}
+	}
+	&__item {}
+}
+.item-info-footer {
+	@media (max-width: $md4) {
+		margin-bottom: 10px;
+	}
+	&_1 {
+		order: 1;
+	}
+	&_2 {
+		order: 2;
+	}
+	&_3 {
+		order: 4;
+	}
+	&_4 {
+		order: 5;
+	}
+	&_5 {
+		order: 3;
+		grid-area: span 2;
+	}
+	&__title {
+		font-family: $thirdFont;
+		font-style: italic;
+		font-size: rem(17);
+		color: $mainColor;
+		margin-bottom: rem(24);
+		@media (max-width: $md4) {
+			text-align: left;
+			width: 100%;
+			margin: 0;
+			padding: rem(10) 0 0 0;
+    	position: relative;
+    	font-size: rem(18);
+    	&::before {
+	      content: "";
+	      width: rem(20);
+	      height: rem(1);
+	      background-color: #fff;
+	      position: absolute;
+	      right: rem(10);
+	      top: rem(20);
+	      transition: transform 0.3s ease 0s;
+	    }
+	    &::after {
+	      content: "";
+	      width: rem(20);
+	      height: rem(1);
+	      background-color: #fff;
+	      position: absolute;
+	      right: rem(10);
+	      top: rem(20);
+	      transition: transform 0.3s ease 0s;
+	      transform: rotate(-90deg);
+	    }
+	    &._active::after {
+	      transform: rotate(0deg);
+	    }
+		}
+	}
+	&__list {
+		@media (max-width: $md4) {
+			padding-top: rem(15);
+		}
+	}
+	&__item {
+		&:not(:last-child) {
+			margin-bottom: rem(16);
+		}
+
+	}
+	&__link {
+		font-family: $mainFont;
+		font-size: rem(20);
+		color: $mainColor;
+		transition: color 0.3s ease;
+		@media (max-width: $md4) {
+			font-size: rem(18);
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				color: $secondColor;
+			}
+		}
+	}
+}
+.social-footer {
+	&__list {
+		display: flex;
+		gap: rem(40);
+	}
+	&__item {}
+	&__link {
+		color: $mainColor;
+		transition: color 0.3s ease;
+		@media (any-hover: hover) {
+			&:hover {
+				color: $secondColor;
+			}
+		}
+	}
+}

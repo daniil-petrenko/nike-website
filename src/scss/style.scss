@@ -1,0 +1,151 @@
+@use 'sass:math';
+
+// Mixins Connect ==================================================================================================
+@import 'base/_mixins';
+
+// Fonts Connect =======================================================================================================================
+
+
+// Connect, if you have local fonts files =======================================================================================================================
+@import 'fonts/_fonts';
+
+
+// Icon Fonts Connect =======================================================================================================================
+// Connect, if you have icon font file
+@import 'fonts/_icons';
+
+
+// Basic Font =======================================================================================================================
+
+$mainFont: "Futura LtCn BT", sans-serif;
+$secondFont: "Futura Bk BT", sans-serif;
+$thirdFont: "Futura XBlkCnIt BT", sans-serif;
+$fourFont: "Futura Hv BT", sans-serif;
+$fiveFont: "Futura Md BT", sans-serif;
+
+$fontSize: rem(16); // 16 - basic font size
+
+// Basic Colors =======================================================================================================================
+$mainColor: #fff;
+$secondColor: #BA0000;
+
+
+// Page min width
+$minWidth: 320;
+// Maket width
+$maxWidth: 1440;
+// Container width
+$maxWidthContainer: 1283;
+// Container padding
+// (30 = 15px in each side, 0 = has not padding)
+$containerPadding: 30;
+$containerSidePadding: math.div($containerPadding, 2);
+
+// Width of first breakpoint work
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+// Breakpoints
+$md1: em($containerWidth);
+$md2: em(991.98);
+$md3: em(767.98);
+$md4: em(479.98);
+
+// Adaptive type
+// 1 - container hasn't breakpoints
+// 2 - container has breakpoints (change width using breakpoints)
+$responsiveType: 1;
+
+// =======================================================================================================================
+// =======================================================================================================================
+
+// Style Reset =======================================================================================================================
+@import 'base/_reset';
+
+
+// Body styles =======================================================================================================================
+body {
+  .lock & {
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
+  }
+  .loaded & {
+  }
+}
+
+
+// Wrapper =======================================================================================================================
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  @supports (overflow: clip) {
+    overflow: clip;
+  }
+  > main {
+    flex: 1 1 auto;
+  }
+  // Slider fix
+  > * {
+    min-width: 0;
+  }
+}
+
+// Container =======================================================================================================================
+@if ($responsiveType==1) {
+  [class*="__container"] {
+    @if ($maxWidthContainer>0) {
+      max-width: rem($containerWidth);
+      margin: 0 auto;
+    }
+    @if ($containerWidth>0) {
+      @if ($maxWidthContainer>0) {
+        padding: 0 rem($containerSidePadding);
+      } @else {
+        @include adaptivValue('padding-left', $containerSidePadding, 15, 1);
+        @include adaptivValue('padding-right', $containerSidePadding, 15, 1);
+      }
+    }
+  }
+} @else {
+  [class*="__container"] {
+    margin: 0 auto;
+    @if ($maxWidthContainer>0) {
+      max-width: rem($containerWidth);
+    } @else {
+      @if ($containerPadding>0) {
+        padding: 0 rem($containerSidePadding);
+      }
+    }
+    @media (max-width: $md2) {
+      max-width: rem(970);
+    }
+    @media (max-width: $md3) {
+      max-width: rem(750);
+    }
+    @media (max-width: $md4) {
+      max-width: none;
+      @if ($containerPadding>0 and $maxWidthContainer>0) {
+        padding: 0 rem($containerSidePadding);
+      }
+    }
+  }
+}
+
+// @import './*.scss';
+
+// Gobal SCSS-files imports
+
+@import '_common';
+
+// Seсtions or Pages SCSS-files imports
+@import '_header';
+@import '_footer';
+@import '_home';
+@import '_base';
+@import 'base/_modal';
+@import 'base/forms/_forms';
+
+// Libs
+// @import './libs/swiper'

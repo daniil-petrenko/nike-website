@@ -1,0 +1,43 @@
+@use 'sass:math';
+
+@mixin adaptivValue($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type == 1 {
+    #{$property}: #{$startSize}px;
+    @media (max-width: #{$containerWidth}px) {
+      #{$property}: calc(#{$minSize}px + #{$addSize} * ((100vw - 320px) / (#{$containerWidth} - 320)));
+    }
+  } @else if $type == 2 {
+    #{$property}: #{$startSize}px;
+    @media (min-width: #{$containerWidth}px) {
+      #{$property}: calc(#{$minSize}px + #{$addSize} * ((100vw - 320px) / (#{$containerWidth} - 320)));
+    }
+    @media (max-width: #{$containerWidth}px) {
+      #{$property}: calc(#{$minSize}px + #{$addSize} * ((100vw - 320px) / (#{$containerWidth} - 320)));
+    }
+  }
+}
+
+@mixin font($font_name, $file_name, $weight, $style) {
+  @font-face {
+    font-family: $font_name;
+    font-display: swap;
+    src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+    font-weight: #{$weight};
+    font-style: #{$style};
+  }
+}
+
+
+@function rem($px, $base: 16) {
+  @return math.div($px, $base) + rem;
+}
+
+@function em($value, $base: 16) {
+  @return math.div($value, $base) + em;
+}
+
+@function percent($value, $total) {
+  @return math.div($value, $total) * 100%;
+}

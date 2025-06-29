@@ -1,0 +1,18 @@
+.lg-sub-html {
+	visibility: hidden;
+	opacity: 0;
+}
+// If you want custom arrow
+// .lg-next, .lg-prev {
+// 	&::before {
+// 		@extend %ic;
+// 		content: "\e906";
+// 		font-size: 40px;
+// 	}
+// }
+// .lg-prev {
+// 	transform: rotate(180deg);
+// 	&::after {
+// 		content: "";
+// 	}
+// }

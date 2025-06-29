@@ -1,0 +1,7 @@
+// ======================[ Tabs ]======================
+[data-tabs-body] > div {
+  display: none;
+  &._tab-active {
+    display: block;
+  }
+}
