@@ -263,7 +263,7 @@ window.onload = function () {
 
       // Obtaining the path to the image in the slide in order to insert it into the main image
       const fullUrl = activeElem.querySelector('.slide-slider-main__image img').src;
-      const path = new URL(fullUrl).pathname.slice(1);
+      const path = new URL(fullUrl).pathname;
       const webpPath = path.replace(/\.png$/, ".webp");
 
       // Update animation
