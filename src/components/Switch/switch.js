@@ -75,18 +75,18 @@ export function componentSwitcherChangeTheme() {
           userTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
 
-      // Перевірка на зміну системної теми
+      // Checking for system theme changes
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
           if (!saveUserTheme) {
               changeTheme();
           }
       });
 
-      // Знаходимо чекбокс
+      // Find the checkbox
       const themeCheckbox = document.querySelector('.switch__checkbox');
       if (themeCheckbox) {
           themeCheckbox.addEventListener('change', function () {
-              // Якщо чекбокс вибрано, переключити на темну тему, інакше на світлу
+              // If the checkbox is selected, switch to dark theme, otherwise to light theme
               if (this.checked) {
                   changeTheme(true);
               } else {

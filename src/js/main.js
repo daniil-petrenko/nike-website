@@ -1,9 +1,5 @@
 'use strict'
 
-// import * as allFunctions from './module/sum.js';
-
-
-
 // ======================[ Header ]======================
 import { componentHeader } from '../components/Header/header.js';
 // import { componentHeaderScroll } from '../components/Header/header.js';
@@ -186,18 +182,31 @@ window.onload = function () {
 
 
    // ============= Change Main Image =============
+   /*
+      How does it work?
+      
+      1) Main variables
+      2) Set up an observer to track class changes in the active slide.
+`        When the “active” class disappears, it means that the slide has changed.
+      3) Creating a MutationObserver to track the loss of the “swiper-slide-active” class
+      4) If the active slide has changed, changeObserve function is called. 
+         It finds a new active slide again and connects the observer to it.
+      5) A function in which the content changes
+
+   */
+
+   // 1
    const mainBlock = document.querySelector('.main__block');
-   const mainImage = document.querySelector('.rotate-block__image img');
    const mainImageBlock = document.querySelector('.rotate-block__image');
-   const mainImageSource = document.querySelector('.rotate-block__image source');
-   const mainSliderButtons = document.querySelector('.slider-main__buttons');
 
    const mainTitle = document.querySelector('.content-main__title');
    const mainDecorTitle = document.querySelector('.main__decor-title');
    const mainPrice = document.querySelector('.content-main__price');
 
+   // Variable for the current slide
    let currentMainSliderSlide;
 
+   // 2
    setTimeout(() => {
       currentMainSliderSlide = document.querySelector('.slider-main__slide.swiper-slide-active')
 
@@ -208,11 +217,12 @@ window.onload = function () {
       });
    });
 
+   // 3
    const mainSliderObserver = new MutationObserver(entries => {
       for (let i = 0; i < entries.length; i++) {
          if (!entries[i].target.classList.contains('swiper-slide-active')) {
             mainSliderObserver.disconnect();
-            changeObserve();
+            changeObserve(); 
             changeMainProduct(entries[i].target);
 
             break;
@@ -220,6 +230,7 @@ window.onload = function () {
       }
    });
 
+   // 4
    const changeObserve = function () {
       currentMainSliderSlide = document.querySelector('.slider-main__slide.swiper-slide-active');
       mainSliderObserver.observe(currentMainSliderSlide, {
@@ -227,7 +238,21 @@ window.onload = function () {
          attributeFilter: ['class']
       });
    }
+
+   // 5
    const changeMainProduct = function (target) {
+      /* 
+         It is important to understand that an active slide is not a slide that is displayed on the screen,
+         but the first slide in the slider that you see (there are 4 slides in total, 1 hidden, followed by 3 more slides).
+         When scrolling through the slider, the class of this active slide changes.
+         If it becomes “prev,” it means that the slide has been hidden (scrolled to the left)
+         and needs to be displayed on the screen. 
+         However, if it becomes “next,” it means that the slider is scrolling in the other direction (to the right)
+         and the last slide (the one that was hidden on the right) in the slider needs to be displayed.
+         For a better understanding, look at the slider in the developer tools,
+         so you will understand how the “prev”, ‘active’ and “next” classes work,
+         and you will also see how the slides change position.
+      */
       let activeElem;
       if (target.classList.contains('swiper-slide-prev')) {
          activeElem = target;
@@ -236,10 +261,12 @@ window.onload = function () {
          activeElem = mainSlides[mainSlides.length - 1];
       }
 
+      // Obtaining the path to the image in the slide in order to insert it into the main image
       const fullUrl = activeElem.querySelector('.slide-slider-main__image img').src;
       const path = new URL(fullUrl).pathname.slice(1);
       const webpPath = path.replace(/\.png$/, ".webp");
 
+      // Update animation
       mainImageBlock.addEventListener('transitionend', changeProductInfo);
 
       mainTitle.classList.add('_hide');
@@ -247,14 +274,15 @@ window.onload = function () {
       mainPrice.classList.add('_hide');
       mainImageBlock.classList.add('_hide');
 
+      // Content updates
       function changeProductInfo(event) {
          mainImageBlock.innerHTML = '';
          mainImageBlock.insertAdjacentHTML('beforeend', `
-          <picture>
-            <source srcset="${webpPath}" type="image/webp">
-            <img src="${path}" alt="Image">
-          </picture>
-      `);
+            <picture>
+               <source srcset="${webpPath}" type="image/webp">
+               <img src="${path}" alt="Image">
+            </picture>
+         `);
 
          // Change titles and price
          mainBlock.dataset.pid = activeElem.dataset.pid

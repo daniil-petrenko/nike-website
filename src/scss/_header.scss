@@ -254,20 +254,20 @@
             color: $secondColor;
          }
       }
-      span {
-         position: absolute;
-         width: rem(16);
-         height: rem(16);
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         top: rem(-10);
-         right: rem(-10);
-         border-radius: 50%;
-         background-color: $secondColor;
-         font-family: $secondFont;
-         font-size: rem(12);
-      }
+         span {
+            position: absolute;
+            width: rem(16);
+            height: rem(16);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: rem(-10);
+            right: rem(-10);
+            border-radius: 50%;
+            background-color: $secondColor;
+            font-family: $secondFont;
+            font-size: rem(12);
+         }
    }
    &__body {
       background: #000;
